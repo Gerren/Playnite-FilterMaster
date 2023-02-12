@@ -1,6 +1,11 @@
 ﻿Id: gerren-filtermaster
 Name: Filter Master
 Author: gerren
-Version: 1.0
+Version: 1.00
 Module: FilterMaster.dll
 Type: GenericPlugin
+Links:
+    - Name: GitHub
+      Url: https://github.com/Gerren/Playnite-FilterMaster
+    - Name: Forum
+      Url: https://playnite.link/forum/thread-1407.html

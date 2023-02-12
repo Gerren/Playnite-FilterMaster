@@ -72,7 +72,11 @@
     <None Include="extension.yaml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Gerren_FilterMaster.yaml" />
+    <None Include="installer.yaml" />
     <None Include="packages.config" />
+    <None Include="publish.bat" />
+    <None Include="verify.bat" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Localization\*.xaml">
@@ -98,6 +102,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="checklist.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

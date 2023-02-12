@@ -1,0 +1,18 @@
+﻿AddonId: gerren-filtermaster
+Name: 'FilterMaster - filter your library as you will'
+Author: 'Gerren'
+Type: Generic
+ShortDescription: Shoveling through piles and piles of games? Cannot find a game you're looking for? This is the extension just for you.
+Description: |-
+    Shoveling through piles and piles of games? Cannot find a game you're looking for? This Playinte (GitHub) extension will help you.
+
+    This extension is heavily inspired by filtering system found in Steam library filters by Lorenzo Stanco. This extension allows you add conditions and their negations, and in doing so it narrows down your endless collection of games.
+Tags: ["Library","Browse","Filter"]
+SourceUrl: 'https://github.com/Gerren/Playnite-FilterMaster'
+InstallerManifestUrl: https://raw.githubusercontent.com/Gerren/Playnite-FilterMaster/master/installer.yaml
+Links:
+    GitHub: https://github.com/Gerren/Playnite-FilterMaster
+    Forum: https://playnite.link/forum/thread-1407.html
+Screenshots:
+    - Thumbnail: https://raw.githubusercontent.com/Gerren/Playnite-FilterMaster/master/filtermaster-thumb.png
+      Image: https://raw.githubusercontent.com/Gerren/Playnite-FilterMaster/master/filtermaster.png
