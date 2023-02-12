@@ -4,9 +4,9 @@ Author: 'Gerren'
 Type: Generic
 ShortDescription: Filtering system for your game library
 Description: |-
-    Shoveling through piles and piles of games? Cannot find a game you're looking for? This extension will help you.
+    Shoveling through piles and piles of games? Cannot find a game you're looking for? Look no more. This extension will help you.
 
-    This extension is heavily inspired by the filtering system found in Steam library filters by Lorenzo Stanco. This extension allows you to add conditions and their negations, and in doing so it narrows down your endless collection of games.
+    This extension complements the built-in filter system and helps when you need to search your library for a game with certain combination of properties. It also allows you to add conditions and their negations, and in doing so it narrows down your endless collection of games. 
 Tags: ["Library","Browse","Filter"]
 SourceUrl: 'https://github.com/Gerren/Playnite-FilterMaster'
 InstallerManifestUrl: https://raw.githubusercontent.com/Gerren/Playnite-FilterMaster/master/installer.yaml
