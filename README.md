@@ -1,7 +1,7 @@
 # Playnite-FilterMaster
 Shoveling through piles and piles of games? Cannot find a game you're looking for? This [Playinte](https://playnite.link/) ([GitHub](https://github.com/JosefNemec/Playnite/)) extension will help you.
 
-This extension is heavily inspired by filtering system found in [Steam library filters](https://www.lorenzostanco.com/lab/steam/) by Lorenzo Stanco. This extension allows you add conditions and their negations, and in doing so it narrows down your endless collection of games.
+This extension is heavily inspired by the filtering system found in [Steam library filters](https://www.lorenzostanco.com/lab/steam/) by Lorenzo Stanco. This extension allows you to add conditions and their negations, and in doing so it narrows down your endless collection of games.
 
 ## Features:
 * It allows much more than the built-in system of filters
