@@ -23,8 +23,12 @@
                 <ColumnDefinition Width="2*" MinWidth="500"/>
             </Grid.ColumnDefinitions>
         <StackPanel Grid.Column="0" Margin="0,50,0,0">
+            <CheckBox IsChecked="{Binding Filter}">
+                <TextBlock Text="{DynamicResource LOCRandomGameLimistToFilter}" d:Text="Currently filtered games only"
+                       Style="{DynamicResource BaseTextBlockStyle}"/>
+            </CheckBox>
             <Button Command="{Binding ResetConditionsCommand}" Content="Clear"/>
-        <ScrollViewer>
+            <ScrollViewer>
                 <StackPanel>
                     
             <ItemsControl ItemsSource="{Binding Conditions}">

@@ -24,6 +24,7 @@ namespace FilterMaster.Models
             {
                 SetValue(ref filter, value);
                 FillGames();
+                UpdateGamesCommand.Execute(this);
             }
         }
 
