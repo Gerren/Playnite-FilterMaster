@@ -14,6 +14,7 @@ namespace FilterMaster.Models
     public class FilterMasterSelectGameViewModel : ObservableObject, IGameVisibilityDeterminer
     {
         private bool filter = true;
+        public static bool showUnavailable = true; // F*CK THIS SH*T
         private ObservableCollection<FilterMasterPropertyCollection> conditions = new ObservableCollection<FilterMasterPropertyCollection>();
 
         public static FilterMasterSelectGameViewModel Instance { get; private set; }
@@ -23,6 +24,15 @@ namespace FilterMaster.Models
             get => filter; set
             {
                 SetValue(ref filter, value);
+                FillGames();
+                UpdateGamesCommand.Execute(this);
+            }
+        }
+        public bool ShowUnavailable
+        {
+            get => showUnavailable; set
+            {
+                SetValue(ref showUnavailable, value);
                 FillGames();
                 UpdateGamesCommand.Execute(this);
             }
@@ -70,6 +80,13 @@ namespace FilterMaster.Models
         public ICommand GoToGameCommand { get; private set; }
         public ICommand ResetConditionsCommand { get; private set; }
 
+        public static Guid ToGuid(int value)
+        {
+            byte[] bytes = new byte[16];
+            BitConverter.GetBytes(value).CopyTo(bytes, 0);
+            return new Guid(bytes);
+        }
+
         public FilterMasterSelectGameViewModel()
         {
             Instance = this;
@@ -95,8 +112,23 @@ namespace FilterMaster.Models
                  UpdateGamesCommand.Execute(this);
              });
 
+            Dictionary<InstallationStatus, Guid> InstallationStatuses = new Dictionary<InstallationStatus, Guid>();
+            foreach (InstallationStatus status in Enum.GetValues(typeof(InstallationStatus)))
+            {
+                InstallationStatuses.Add(status, ToGuid((int)status));
+            }
+
+
             Func<Game, IEnumerable<Guid>> func;
             FilterMasterPropertyCollection collection;
+
+            func = (Game game) => new List<Guid>() { InstallationStatuses[game.InstallationStatus] };
+            collection = new FilterMasterPropertyCollection()
+            {
+                Name = ResourceProvider.GetString("LOCGameIsInstalledTitle"),
+            };
+            InstallationStatuses.Keys.ToList().ForEach(i => collection.Add(new FilterMasterProperty(InstallationStatuses[i], Enum.GetName(typeof(InstallationStatus), i),func)));
+            Conditions.Add(collection);
 
             func = (Game game) => game.FeatureIds;
             collection = new FilterMasterPropertyCollection()

@@ -13,6 +13,7 @@
              x:Class="FilterMaster.Views.FilterMasterSelectGameView"
              >
     <PluginUserControl.Resources>
+        <Converters:FilterMasterFilterVisibliltyConverter x:Key="FilterMasterFilterVisibliltyConverter"/>
         <Converters:FilterMasterSelectedColorConverter x:Key="FilterMasterSelectedColorConverter"/>
         <FilterMaster:PlayniteImageConverter x:Key="PlayniteImageConverter"/>
         <Converters:FilterMasterGameVisibilityConverter x:Key="FilterMasterGameVisibilityConverter"/>
@@ -25,6 +26,10 @@
         <StackPanel Grid.Column="0" Margin="0,50,0,0">
             <CheckBox IsChecked="{Binding Filter}">
                 <TextBlock Text="{DynamicResource LOCRandomGameLimistToFilter}" d:Text="Currently filtered games only"
+                       Style="{DynamicResource BaseTextBlockStyle}"/>
+            </CheckBox>
+            <CheckBox IsChecked="{Binding ShowUnavailable}" Command="{Binding ResetConditionsCommand}">
+                <TextBlock Text="{DynamicResource LOCFilterMasterShowUnavailable}" d:Text="Show unavailable"
                        Style="{DynamicResource BaseTextBlockStyle}"/>
             </CheckBox>
             <Button Command="{Binding ResetConditionsCommand}" Content="Clear"/>
@@ -58,7 +63,12 @@
                                     </ItemsControl.ItemsPanel>
                                     <ItemsControl.ItemTemplate>
                                         <DataTemplate>
-                                            <Border BorderThickness="1" CornerRadius="8" Background="{Binding Selected, Converter={StaticResource FilterMasterSelectedColorConverter},Mode=OneWay}" Margin="2">
+                                            <Border BorderThickness="1" 
+                                                    CornerRadius="8" 
+                                                    Background="{Binding Selected, Converter={StaticResource FilterMasterSelectedColorConverter},Mode=OneWay}" 
+                                                    Visibility="{Binding Selected, Converter={StaticResource FilterMasterFilterVisibliltyConverter}, Mode=OneWay}"
+                                                    Margin="2" 
+                                                    >
                                                 <TextBlock Text="{Binding Name}" Style="{DynamicResource BaseTextBlockStyle}" Padding="3" >
                                                     <TextBlock.InputBindings>
                                                         <MouseBinding  MouseAction="LeftClick" Command="{Binding ToggleSelectedCommand}" />
