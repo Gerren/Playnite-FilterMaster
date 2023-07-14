@@ -44,5 +44,12 @@ namespace FilterMaster.Models
 
 
         protected override event PropertyChangedEventHandler PropertyChanged;
+
+        internal void Sort()
+        {
+            List<FilterMasterProperty> properties = this.OrderBy(p => p.Name).ToList();
+            Clear();
+            properties.ForEach(p => Add(p));
+        }
     }
 }

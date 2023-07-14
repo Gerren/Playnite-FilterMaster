@@ -1,5 +1,6 @@
 ﻿using Playnite.SDK;
 using Playnite.SDK.Models;
+using Playnite.SDK.Plugins;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -93,9 +94,9 @@ namespace FilterMaster.Models
             SwitchFilteredCommand = new ActionCommand((_) => Filter = !Filter);
             UpdateGamesCommand = new ActionCommand((_) =>
             {
-            Conditions.ForEach(cset => cset
-                .Where(condition => condition.Selected == FilterMasterProperty.SelectedState.NotSet)
-                .ForEach(condition => condition.Selected = FilterMasterProperty.SelectedState.NotPossible));
+                Conditions.ForEach(cset => cset
+                    .Where(condition => condition.Selected == FilterMasterProperty.SelectedState.NotSet)
+                    .ForEach(condition => condition.Selected = FilterMasterProperty.SelectedState.NotPossible));
                 this.OnPropertyChanged(nameof(Games));
                 this.OnPropertyChanged(nameof(Conditions));
                 Sniff();
@@ -127,8 +128,41 @@ namespace FilterMaster.Models
             {
                 Name = ResourceProvider.GetString("LOCGameIsInstalledTitle"),
             };
-            InstallationStatuses.Keys.ToList().ForEach(i => collection.Add(new FilterMasterProperty(InstallationStatuses[i], Enum.GetName(typeof(InstallationStatus), i),func)));
+            InstallationStatuses.Keys.ToList().ForEach(i => collection.Add(new FilterMasterProperty(InstallationStatuses[i], Enum.GetName(typeof(InstallationStatus), i), func)));
             Conditions.Add(collection);
+
+
+            func = (Game game) => game.PlatformIds;
+            collection = new FilterMasterPropertyCollection()
+            {
+                Name = ResourceProvider.GetString("LOCPlatformTitle"),
+            };
+            API.Instance.Database.Platforms.ForEach(p => collection.Add(new FilterMasterProperty(p.Id, p.Name, func)));
+            collection.Sort();
+            Conditions.Add(collection);
+
+
+            func = (Game game) => new List<Guid>() { game.PluginId };
+            collection = new FilterMasterPropertyCollection()
+            {
+                Name = ResourceProvider.GetString("LOCLibrary"),
+            };
+            API.Instance.Addons.Plugins
+                .OfType<LibraryPlugin>()
+                .ForEach(p => collection.Add(new FilterMasterProperty(p.Id, p.Name, func)));
+            collection.Add(new FilterMasterProperty(Guid.Empty, "Playnite", func));
+            collection.Sort();
+            Conditions.Add(collection);
+
+            func = (Game game) => new List<Guid>() { game.SourceId };
+            collection = new FilterMasterPropertyCollection()
+            {
+                Name = ResourceProvider.GetString("LOCSourceLabel"),
+            };
+            API.Instance.Database.Sources.OrderBy(p => p.Name).ForEach(p => collection.Add(new FilterMasterProperty(p.Id, p.Name, func)));
+            collection.Add(new FilterMasterProperty(Guid.Empty, "Playnite", func));
+            Conditions.Add(collection);
+
 
             func = (Game game) => game.FeatureIds;
             collection = new FilterMasterPropertyCollection()
