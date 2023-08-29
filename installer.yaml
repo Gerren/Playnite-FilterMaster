@@ -1,8 +1,8 @@
 ﻿AddonId: gerren-filtermaster
 Packages:
-  - Version: 1.02
+  - Version: 1.03
     RequiredApiVersion: 6.9.0
     ReleaseDate: 2023-07-14
-    PackageUrl: https://github.com/Gerren/Playnite-FilterMaster/releases/download/release_1_02/gerren-filtermaster_1_02.pext
+    PackageUrl: https://github.com/Gerren/Playnite-FilterMaster/releases/download/release_1_03/gerren-filtermaster_1_03.pext
     Changelog:
-      - Added Platform, Library and Source filters
+      - Fixed the scrollbar
