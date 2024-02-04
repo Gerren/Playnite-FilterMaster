@@ -15,7 +15,7 @@ BEWARE! ALL STEPS MUST BE DONE IN ORDER TO PUBLISH CORRECTLY
 - installer.yaml
   - update release date
   - update changelog
-- commit
+- commit + SYNC!
 - run publish.bat				< YOU ARE HERE
 - publish on github
 - run verify.bat
