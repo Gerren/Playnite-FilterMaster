@@ -18,7 +18,7 @@ namespace FilterMaster.Models
         public static bool showUnavailable = true; // F*CK THIS SH*T
         private ObservableCollection<FilterMasterPropertyCollection> conditions = new ObservableCollection<FilterMasterPropertyCollection>();
 
-        public static FilterMasterSelectGameViewModel Instance { get; private set; }
+        public static FilterMasterSelectGameViewModel Instance { get; set; }
 
         public bool Filter
         {
@@ -88,9 +88,27 @@ namespace FilterMaster.Models
             return new Guid(bytes);
         }
 
+        internal void DoInit()
+        {
+            FillGames();
+            Sniff();
+        }
+        public void Init()
+        {
+            if (Instance != null)
+            {
+                Games = Instance.Games;
+                Conditions = Instance.Conditions;
+            }
+            else
+            {
+                DoInit();
+            }
+            Instance = this;
+        }
+
         public FilterMasterSelectGameViewModel()
         {
-            Instance = this;
             SwitchFilteredCommand = new ActionCommand((_) => Filter = !Filter);
             UpdateGamesCommand = new ActionCommand((_) =>
             {
@@ -109,6 +127,7 @@ namespace FilterMaster.Models
             });
             ResetConditionsCommand = new ActionCommand((_) =>
              {
+                 DoInit();
                  conditions.ForEach(condset => condset.ForEach(condition => condition.Selected = FilterMasterProperty.SelectedState.NotPossible));
                  UpdateGamesCommand.Execute(this);
              });
@@ -203,8 +222,7 @@ namespace FilterMaster.Models
             };
             API.Instance.Database.CompletionStatuses.OrderBy(p => p.Name).ForEach(p => collection.Add(new FilterMasterProperty(p.Id, p.Name, func)));
             Conditions.Add(collection);
-            FillGames();
-            Sniff();
+            //DoInit();
         }
 
         private void Sniff()

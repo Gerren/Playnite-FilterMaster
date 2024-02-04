@@ -23,7 +23,7 @@
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="2*" MinWidth="500"/>
             </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0" Margin="0,50,0,0">
+        <DockPanel Name="Conditions" Grid.Column="0" Margin="0,50,0,0">
             <StackPanel DockPanel.Dock="Top">
                 <CheckBox IsChecked="{Binding Filter}">
                     <TextBlock Text="{DynamicResource LOCRandomGameLimistToFilter}" d:Text="Currently filtered games only"
@@ -89,8 +89,9 @@
                 </StackPanel>
             </ScrollViewer>
         </DockPanel>
-            <ScrollViewer Grid.Column="1" Margin="0,50,0,20">
-                <StackPanel>
+            <ScrollViewer Name="Games" Grid.Column="1" Margin="0,50,0,20">
+                <VirtualizingStackPanel IsVirtualizing="True"
+                                                VirtualizationMode="Recycling">                    
                     <ItemsControl ItemsSource="{Binding Games}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
@@ -126,7 +127,7 @@
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
-                </StackPanel>  
+                </VirtualizingStackPanel>  
             </ScrollViewer>          
     </Grid>
 </PluginUserControl>

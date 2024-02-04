@@ -22,6 +22,8 @@ namespace FilterMaster.Views
     /// </summary>
     public partial class FilterMasterSelectGameView : PluginUserControl
     {
+        private FilterMasterSelectGameViewModel vm;
+
         public FilterMasterSelectGameView()
         {
             InitializeComponent();
@@ -31,6 +33,13 @@ namespace FilterMaster.Views
         {
             FilterMasterSelectGameViewModel model = DataContext as FilterMasterSelectGameViewModel;
             model.UpdateGamesCommand.Execute(null);
+        }
+
+        internal void Init()
+        {
+            vm = new FilterMasterSelectGameViewModel();
+            DataContext = vm;
+            vm.Init();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

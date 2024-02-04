@@ -46,7 +46,7 @@ namespace FilterMaster
                 Opened = () =>
                 {
                     FilterMasterSelectGameView ViewExtension = new FilterMasterSelectGameView();
-                    ViewExtension.DataContext = new FilterMasterSelectGameViewModel();
+                    ViewExtension.Init();
                     return ViewExtension;
                 };
                 Visible = true;

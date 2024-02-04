@@ -5,7 +5,7 @@ BEWARE! ALL STEPS MUST BE DONE IN ORDER TO PUBLISH CORRECTLY
   - when done, update manifest installer.yaml
 - development
 - test on local
-  - settings -> devs -> enable/add path to debug
+  - settings (F4) -> devs -> enable/add path to debug
 - change version (4x)
   -	extension.yaml
   -	installer.yaml
