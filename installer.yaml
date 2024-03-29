@@ -1,8 +1,8 @@
 ﻿AddonId: gerren-filtermaster
 Packages:
-  - Version: 1.06
+  - Version: 1.07
     RequiredApiVersion: 6.11.0
     ReleaseDate: 2024-03-29
-    PackageUrl: https://github.com/Gerren/Playnite-FilterMaster/releases/download/release_1_06/gerren-filtermaster_1_06.pext
+    PackageUrl: https://github.com/Gerren/Playnite-FilterMaster/releases/download/release_1_07/gerren-filtermaster_1_07.pext
     Changelog:
-      - Preset saving
+      - FIX preset loading - limit to current and show unavailable checkboxes are now correctly loaded
