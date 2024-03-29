@@ -17,6 +17,7 @@
         <Converters:FilterMasterSelectedColorConverter x:Key="FilterMasterSelectedColorConverter"/>
         <FilterMaster:PlayniteImageConverter x:Key="PlayniteImageConverter"/>
         <Converters:FilterMasterGameVisibilityConverter x:Key="FilterMasterGameVisibilityConverter"/>
+     
     </PluginUserControl.Resources>
     <Grid>
             <Grid.ColumnDefinitions>
@@ -95,7 +96,7 @@
                     <ItemsControl ItemsSource="{Binding Games}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <Grid Margin="20,0,0,0">
+                                <Grid Margin="20,0,0,0" Height="25">
                                     <Grid.Style>
                                         <Style TargetType="FrameworkElement">
                                             <Setter Property="Visibility">

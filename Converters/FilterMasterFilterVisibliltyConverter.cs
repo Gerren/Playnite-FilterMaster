@@ -10,10 +10,10 @@ namespace FilterMaster.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value == null || !(value is FilterMasterProperty.SelectedState prop)) return Visibility.Visible;
+            if (value == null || !(value is SelectedState prop)) return Visibility.Visible;
             switch (prop)
             {
-                case FilterMasterProperty.SelectedState.NotPossible: return  FilterMasterSelectGameViewModel.showUnavailable ? Visibility.Visible : Visibility.Collapsed;
+                case SelectedState.NotPossible: return  FilterMasterSelectGameViewModel.showUnavailable ? Visibility.Visible : Visibility.Collapsed;
                 default: return Visibility.Visible;
             }
         }

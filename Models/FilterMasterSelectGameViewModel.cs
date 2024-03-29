@@ -50,14 +50,28 @@ namespace FilterMaster.Models
 
         public bool IsVisible(Game game)
         {
+            var brackets = new List<SelectedState>() { 
+                SelectedState.Bracket1, 
+                SelectedState.Bracket2, 
+                SelectedState.Bracket3, 
+                SelectedState.Bracket4, 
+                SelectedState.Bracket5 
+            };
+
             foreach (FilterMasterPropertyCollection conditionSet in Conditions)
             {
-                foreach (FilterMasterProperty condition in conditionSet)
+                // if not .. all ... true, then do not show
+                if (!conditionSet.Where(c => c.Selected == SelectedState.Selected).All(c => c.Validate(game))) return false;
+                // if ... any ... false, then do not show
+                if (conditionSet.Where(c => c.Selected == SelectedState.NotSelected).Any(c => !c.Validate(game))) return false;
+
+                foreach (SelectedState bracket in brackets)
                 {
-                    if (!condition.Validate(game))
-                    {
-                        return false;
-                    }
+                    if (!conditionSet.Any(c => c.Selected == bracket)) continue;
+                    // if ... any ... true, then continue
+                    if (conditionSet.Where(c => c.Selected == bracket).Any(c => c.Validate(game))) continue;
+                    // if .. all ... false, then do not show
+                    return false;
                 }
             }
             return true;
@@ -113,8 +127,8 @@ namespace FilterMaster.Models
             UpdateGamesCommand = new ActionCommand((_) =>
             {
                 Conditions.ForEach(cset => cset
-                    .Where(condition => condition.Selected == FilterMasterProperty.SelectedState.NotSet)
-                    .ForEach(condition => condition.Selected = FilterMasterProperty.SelectedState.NotPossible));
+                    .Where(condition => condition.Selected == SelectedState.NotSet)
+                    .ForEach(condition => condition.Selected = SelectedState.NotPossible));
                 this.OnPropertyChanged(nameof(Games));
                 this.OnPropertyChanged(nameof(Conditions));
                 Sniff();
@@ -128,7 +142,7 @@ namespace FilterMaster.Models
             ResetConditionsCommand = new ActionCommand((_) =>
              {
                  DoInit();
-                 conditions.ForEach(condset => condset.ForEach(condition => condition.Selected = FilterMasterProperty.SelectedState.NotPossible));
+                 conditions.ForEach(condset => condset.ForEach(condition => condition.Selected = SelectedState.NotPossible));
                  UpdateGamesCommand.Execute(this);
              });
 

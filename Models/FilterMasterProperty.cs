@@ -24,11 +24,49 @@ namespace FilterMaster.Models
                     case SelectedState.NotPossible:
                         Selected = SelectedState.Selected;
                         break;
+                    case SelectedState.Maybe:
                     case SelectedState.Selected:
                         Selected = SelectedState.NotSelected;
                         break;
-                    case SelectedState.Maybe:
-                        Selected = SelectedState.NotSelected;
+                    case SelectedState.NotSelected:
+                        if (!FilterMasterSelectGameViewModel.showUnavailable)
+                        {
+                            Selected = SelectedState.NotSet;
+                            break;
+                        }
+                        Selected = SelectedState.Bracket1;
+                        break;
+                    case SelectedState.Bracket1:
+                        if (!FilterMasterSelectGameViewModel.showUnavailable)
+                        {
+                            Selected = SelectedState.NotSet;
+                            break;
+                        }
+                        Selected = SelectedState.Bracket2;
+                        break;
+                    case SelectedState.Bracket2:
+                        if (!FilterMasterSelectGameViewModel.showUnavailable)
+                        {
+                            Selected = SelectedState.NotSet;
+                            break;
+                        }
+                        Selected = SelectedState.Bracket3;
+                        break;
+                    case SelectedState.Bracket3:
+                        if (!FilterMasterSelectGameViewModel.showUnavailable)
+                        {
+                            Selected = SelectedState.NotSet;
+                            break;
+                        }
+                        Selected = SelectedState.Bracket4;
+                        break;
+                    case SelectedState.Bracket4:
+                        if (!FilterMasterSelectGameViewModel.showUnavailable)
+                        {
+                            Selected = SelectedState.NotSet;
+                            break;
+                        }
+                        Selected = SelectedState.Bracket5;
                         break;
                     default:
                         Selected = SelectedState.NotSet;
@@ -53,16 +91,10 @@ namespace FilterMaster.Models
         public Guid Id { get; private set; }
         public string Name { get; private set; }
 
+        /// <summary>
+        /// Enumerates all ids of this specific property for a given game
+        /// </summary>
         public Func<Game, IEnumerable<Guid>> Validator { get; private set; }
-
-        public enum SelectedState
-        {
-            NotSet,
-            NotSelected,
-            Maybe,
-            Selected,
-            NotPossible,
-        }
 
         internal bool Validate(Game game)
         {
@@ -70,7 +102,13 @@ namespace FilterMaster.Models
             IEnumerable<Guid> ids = Validator(game);
             switch (Selected)
             {
-                case SelectedState.Selected: return ids != null && ids.Contains(Id);
+                case SelectedState.Selected:
+                case SelectedState.Bracket1:
+                case SelectedState.Bracket2:
+                case SelectedState.Bracket3:
+                case SelectedState.Bracket4:
+                case SelectedState.Bracket5:
+                    return ids != null && ids.Contains(Id);
                 case SelectedState.NotSelected: return ids == null || !ids.Contains(Id);
                 default:
                     return true;

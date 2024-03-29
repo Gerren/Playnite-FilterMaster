@@ -58,6 +58,7 @@
     <Compile Include="Models\ActionCommand.cs" />
     <Compile Include="Models\FilterMasterPropertyCollection.cs" />
     <Compile Include="Models\IGameVisibilityDeterminer.cs" />
+    <Compile Include="Models\SelectedState.cs" />
     <Compile Include="PlayniteImageConverter.cs" />
     <Compile Include="Views\FilterMasterSettingsView.xaml.cs">
       <DependentUpon>FilterMasterSettingsView.xaml</DependentUpon>
