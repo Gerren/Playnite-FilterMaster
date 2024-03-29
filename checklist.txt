@@ -16,6 +16,7 @@ BEWARE! ALL STEPS MUST BE DONE IN ORDER TO PUBLISH CORRECTLY
   - update release date
   - update changelog
 - commit + SYNC!
+- open project folder (right click in VS, Open Folder in File Explorer)
 - run publish.bat				< YOU ARE HERE
 - publish on github
 - run verify.bat
