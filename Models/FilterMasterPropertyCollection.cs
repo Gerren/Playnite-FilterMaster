@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Playnite.SDK.Data;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -31,6 +32,7 @@ namespace FilterMaster.Models
             CollapseToggleCommand = new ActionCommand((_)=>  IsVisible = IsVisible == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible);
         }
 
+        [DontSerialize]
         public Visibility IsVisible
         {
             get => isVisible; set
@@ -40,6 +42,7 @@ namespace FilterMaster.Models
             }
         }
 
+        [DontSerialize]
         public ICommand CollapseToggleCommand { get; set; }
 
 

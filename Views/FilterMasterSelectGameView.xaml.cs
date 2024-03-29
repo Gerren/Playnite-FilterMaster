@@ -47,5 +47,11 @@ namespace FilterMaster.Views
             FilterMasterSelectGameViewModel model = DataContext as FilterMasterSelectGameViewModel;
             model.UpdateGamesCommand.Execute(null);
         }
+
+        private void CmbPreset_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            FilterMasterSelectGameViewModel model = DataContext as FilterMasterSelectGameViewModel;
+            model.ApplyPresavedFilterCommand.Execute(CmbPreset.SelectedItem);
+        }
     }
 }

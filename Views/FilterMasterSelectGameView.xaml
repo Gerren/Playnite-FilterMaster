@@ -13,11 +13,12 @@
              x:Class="FilterMaster.Views.FilterMasterSelectGameView"
              >
     <PluginUserControl.Resources>
+        <Converters:BooleanVisibilityConverter x:Key="BooleanVisibilityConverter"/>
         <Converters:FilterMasterFilterVisibliltyConverter x:Key="FilterMasterFilterVisibliltyConverter"/>
         <Converters:FilterMasterSelectedColorConverter x:Key="FilterMasterSelectedColorConverter"/>
         <FilterMaster:PlayniteImageConverter x:Key="PlayniteImageConverter"/>
         <Converters:FilterMasterGameVisibilityConverter x:Key="FilterMasterGameVisibilityConverter"/>
-     
+
     </PluginUserControl.Resources>
     <Grid>
             <Grid.ColumnDefinitions>
@@ -34,6 +35,37 @@
                     <TextBlock Text="{DynamicResource LOCFilterMasterShowUnavailable}" d:Text="Show unavailable"
                            Style="{DynamicResource BaseTextBlockStyle}"/>
                 </CheckBox>
+                
+                <!-- TODO LOCALIZATION -->
+                
+                <DockPanel Visibility="{Binding IsAddingNewFilter, Converter={StaticResource BooleanVisibilityConverter}, ConverterParameter=negate}">
+                    <Label>Presets:</Label>
+                    <Button DockPanel.Dock="Right" Padding="5,0"
+                            Command="{Binding ToggleAddingFilterCommand}" CommandParameter="true"
+                            >New</Button>
+                    <Button DockPanel.Dock="Right" Padding="5,0"
+                            Command="{Binding OverwritePresavedFilterCommand}"
+                            >Overwrite</Button>
+                    <Button DockPanel.Dock="Right" Padding="5,0"
+                            Command="{Binding DeletePresavedFilterCommand}"
+                            >Delete</Button>
+                    <ComboBox MinWidth="120" Margin="3" Name="CmbPreset" 
+                              ItemsSource="{Binding Filters}" DisplayMemberPath="FilterName"
+                              SelectedItem="{Binding CurrentFilter}"
+                              SelectionChanged="CmbPreset_SelectionChanged"/>
+                </DockPanel>
+                <DockPanel Visibility="{Binding IsAddingNewFilter, Converter={StaticResource BooleanVisibilityConverter}}">
+                    <Label>New preset:</Label>
+                    <Button DockPanel.Dock="Right"  Padding="5,0"
+                            Command="{Binding ToggleAddingFilterCommand}" CommandParameter="false"
+                            >Cancel</Button>
+                    <Button DockPanel.Dock="Right" Padding="5,0"
+                            Command="{Binding AddNewFilterCommand}"
+                            >Save</Button>
+                    <TextBox MinWidth="120" Margin="3"
+                             Text="{Binding NewFilterName}"
+                             />
+                </DockPanel>
                 <Button Command="{Binding ResetConditionsCommand}" Content="Clear"/>
             </StackPanel>
             <ScrollViewer>

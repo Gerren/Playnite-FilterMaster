@@ -50,6 +50,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converters\BooleanVisibilityConverter.cs" />
     <Compile Include="Converters\FilterMasterGameVisibilityConverter.cs" />
     <Compile Include="Converters\FilterMasterFilterVisibliltyConverter.cs" />
     <Compile Include="Converters\FilterMasterSelectedColorConverter.cs" />
@@ -58,6 +59,8 @@
     <Compile Include="Models\ActionCommand.cs" />
     <Compile Include="Models\FilterMasterPropertyCollection.cs" />
     <Compile Include="Models\IGameVisibilityDeterminer.cs" />
+    <Compile Include="Models\PresavedCondition.cs" />
+    <Compile Include="Models\PresavedFilter.cs" />
     <Compile Include="Models\SelectedState.cs" />
     <Compile Include="PlayniteImageConverter.cs" />
     <Compile Include="Views\FilterMasterSettingsView.xaml.cs">
